@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coding Quotes Infinite Moving Cards</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes scroll {
+      to {
+        transform: translate(calc(-50% - 0.5rem));
+      }
+    }
+    .animate-scroll {
+      animation: scroll var(--animation-duration, 40s) linear infinite;
+      animation-play-state: var(--animation-play-state, running);
+      animation-direction: var(--animation-direction, normal);
+    }
+  </style>
+</head>
+<body class="bg-black text-white">
+  <div class="h-screen flex flex-col items-center justify-center p-4">
+    <div class="w-full max-w-7xl mx-auto">
+      <h1 class="text-3xl font-bold text-center mb-12">Developer Wisdom</h1>
+      
+      <!-- First row moving right -->
+      <div class="h-[18rem] rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
+        <div class="scroller relative z-20 max-w-7xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]">
+          <ul class="flex w-max min-w-full shrink-0 flex-nowrap gap-4 py-4 animate-scroll hover:[animation-play-state:paused]">
+            <!-- Items will be duplicated by JavaScript -->
+            <li class="relative w-[350px] max-w-full shrink-0 rounded-2xl border border-b-0 border-zinc-200 bg-[linear-gradient(180deg,#fafafa,#f5f5f5)] px-8 py-6 md:w-[450px] dark:border-zinc-700 dark:bg-[linear-gradient(180deg,#27272a,#18181b)]">
+              <blockquote>
+                <span class="relative z-20 text-sm leading-[1.6] font-normal text-neutral-800 dark:text-gray-100">
+                  while(!success) { tryAgain(); }
+                </span>
+                <div class="relative z-20 mt-6 flex flex-row items-center">
+                  <span class="flex flex-col gap-1">
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      Developer Mantra
+                    </span>
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      Persistence Pattern
+                    </span>
+                  </span>
+                </div>
+              </blockquote>
+            </li>
+            <li class="relative w-[350px] max-w-full shrink-0 rounded-2xl border border-b-0 border-zinc-200 bg-[linear-gradient(180deg,#fafafa,#f5f5f5)] px-8 py-6 md:w-[450px] dark:border-zinc-700 dark:bg-[linear-gradient(180deg,#27272a,#18181b)]">
+              <blockquote>
+                <span class="relative z-20 text-sm leading-[1.6] font-normal text-neutral-800 dark:text-gray-100">
+                  First solve the problem, then write the code.
+                </span>
+                <div class="relative z-20 mt-6 flex flex-row items-center">
+                  <span class="flex flex-col gap-1">
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      John Johnson
+                    </span>
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      Programming Principle
+                    </span>
+                  </span>
+                </div>
+              </blockquote>
+            </li>
+            <li class="relative w-[350px] max-w-full shrink-0 rounded-2xl border border-b-0 border-zinc-200 bg-[linear-gradient(180deg,#fafafa,#f5f5f5)] px-8 py-6 md:w-[450px] dark:border-zinc-700 dark:bg-[linear-gradient(180deg,#27272a,#18181b)]">
+              <blockquote>
+                <span class="relative z-20 text-sm leading-[1.6] font-normal text-neutral-800 dark:text-gray-100">
+                  Any code of your own that you haven't looked at for six or more months might as well have been written by someone else.
+                </span>
+                <div class="relative z-20 mt-6 flex flex-row items-center">
+                  <span class="flex flex-col gap-1">
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      Eagleson's Law
+                    </span>
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      Code Maintenance
+                    </span>
+                  </span>
+                </div>
+              </blockquote>
+            </li>
+            <li class="relative w-[350px] max-w-full shrink-0 rounded-2xl border border-b-0 border-zinc-200 bg-[linear-gradient(180deg,#fafafa,#f5f5f5)] px-8 py-6 md:w-[450px] dark:border-zinc-700 dark:bg-[linear-gradient(180deg,#27272a,#18181b)]">
+              <blockquote>
+                <span class="relative z-20 text-sm leading-[1.6] font-normal text-neutral-800 dark:text-gray-100">
+                  Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.
+                </span>
+                <div class="relative z-20 mt-6 flex flex-row items-center">
+                  <span class="flex flex-col gap-1">
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      Brian Kernighan
+                    </span>
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      The Elements of Programming Style
+                    </span>
+                  </span>
+                </div>
+              </blockquote>
+            </li>
+            <li class="relative w-[350px] max-w-full shrink-0 rounded-2xl border border-b-0 border-zinc-200 bg-[linear-gradient(180deg,#fafafa,#f5f5f5)] px-8 py-6 md:w-[450px] dark:border-zinc-700 dark:bg-[linear-gradient(180deg,#27272a,#18181b)]">
+              <blockquote>
+                <span class="relative z-20 text-sm leading-[1.6] font-normal text-neutral-800 dark:text-gray-100">
+                  There are two ways to write error-free programs; only the third one works.
+                </span>
+                <div class="relative z-20 mt-6 flex flex-row items-center">
+                  <span class="flex flex-col gap-1">
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      Alan J. Perlis
+                    </span>
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      Epigrams on Programming
+                    </span>
+                  </span>
+                </div>
+              </blockquote>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Spacer between rows - same height as gap between cards -->
+      <div class="h-4"></div>
+      
+      <!-- Second row moving left -->
+      <div class="h-[18rem] rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
+        <div class="scroller relative z-20 max-w-7xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]">
+          <ul class="flex w-max min-w-full shrink-0 flex-nowrap gap-4 py-4 animate-scroll hover:[animation-play-state:paused]" style="--animation-direction:reverse">
+            <!-- Items will be duplicated by JavaScript -->
+            <li class="relative w-[350px] max-w-full shrink-0 rounded-2xl border border-b-0 border-zinc-200 bg-[linear-gradient(180deg,#fafafa,#f5f5f5)] px-8 py-6 md:w-[450px] dark:border-zinc-700 dark:bg-[linear-gradient(180deg,#27272a,#18181b)]">
+              <blockquote>
+                <span class="relative z-20 text-sm leading-[1.6] font-normal text-neutral-800 dark:text-gray-100">
+                  The best error message is the one that never shows up.
+                </span>
+                <div class="relative z-20 mt-6 flex flex-row items-center">
+                  <span class="flex flex-col gap-1">
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      Thomas Fuchs
+                    </span>
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      JavaScript Developer
+                    </span>
+                  </span>
+                </div>
+              </blockquote>
+            </li>
+            <li class="relative w-[350px] max-w-full shrink-0 rounded-2xl border border-b-0 border-zinc-200 bg-[linear-gradient(180deg,#fafafa,#f5f5f5)] px-8 py-6 md:w-[450px] dark:border-zinc-700 dark:bg-[linear-gradient(180deg,#27272a,#18181b)]">
+              <blockquote>
+                <span class="relative z-20 text-sm leading-[1.6] font-normal text-neutral-800 dark:text-gray-100">
+                  Premature optimization is the root of all evil.
+                </span>
+                <div class="relative z-20 mt-6 flex flex-row items-center">
+                  <span class="flex flex-col gap-1">
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      Donald Knuth
+                    </span>
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      Computer Programming as an Art
+                    </span>
+                  </span>
+                </div>
+              </blockquote>
+            </li>
+            <li class="relative w-[350px] max-w-full shrink-0 rounded-2xl border border-b-0 border-zinc-200 bg-[linear-gradient(180deg,#fafafa,#f5f5f5)] px-8 py-6 md:w-[450px] dark:border-zinc-700 dark:bg-[linear-gradient(180deg,#27272a,#18181b)]">
+              <blockquote>
+                <span class="relative z-20 text-sm leading-[1.6] font-normal text-neutral-800 dark:text-gray-100">
+                  Good code is its own best documentation.
+                </span>
+                <div class="relative z-20 mt-6 flex flex-row items-center">
+                  <span class="flex flex-col gap-1">
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      Steve McConnell
+                    </span>
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      Code Complete
+                    </span>
+                  </span>
+                </div>
+              </blockquote>
+            </li>
+            <li class="relative w-[350px] max-w-full shrink-0 rounded-2xl border border-b-0 border-zinc-200 bg-[linear-gradient(180deg,#fafafa,#f5f5f5)] px-8 py-6 md:w-[450px] dark:border-zinc-700 dark:bg-[linear-gradient(180deg,#27272a,#18181b)]">
+              <blockquote>
+                <span class="relative z-20 text-sm leading-[1.6] font-normal text-neutral-800 dark:text-gray-100">
+                  If debugging is the process of removing bugs, then programming must be the process of putting them in.
+                </span>
+                <div class="relative z-20 mt-6 flex flex-row items-center">
+                  <span class="flex flex-col gap-1">
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      Edsger Dijkstra
+                    </span>
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      Computer Scientist
+                    </span>
+                  </span>
+                </div>
+              </blockquote>
+            </li>
+            <li class="relative w-[350px] max-w-full shrink-0 rounded-2xl border border-b-0 border-zinc-200 bg-[linear-gradient(180deg,#fafafa,#f5f5f5)] px-8 py-6 md:w-[450px] dark:border-zinc-700 dark:bg-[linear-gradient(180deg,#27272a,#18181b)]">
+              <blockquote>
+                <span class="relative z-20 text-sm leading-[1.6] font-normal text-neutral-800 dark:text-gray-100">
+                  The most disastrous thing that you can ever learn is your first programming language.
+                </span>
+                <div class="relative z-20 mt-6 flex flex-row items-center">
+                  <span class="flex flex-col gap-1">
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      Alan Kay
+                    </span>
+                    <span class="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                      Computer Scientist
+                    </span>
+                  </span>
+                </div>
+              </blockquote>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Duplicate items for infinite scrolling effect
+    document.addEventListener('DOMContentLoaded', function() {
+      const scrollers = document.querySelectorAll('.scroller ul');
+      
+      scrollers.forEach(scroller => {
+        const scrollerContent = Array.from(scroller.children);
+        
+        scrollerContent.forEach(item => {
+          const duplicatedItem = item.cloneNode(true);
+          scroller.appendChild(duplicatedItem);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

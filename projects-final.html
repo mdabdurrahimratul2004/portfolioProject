@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus Cards Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .card {
+      transition: all 300ms ease-out;
+    }
+    .card-blur {
+      filter: blur(4px);
+      transform: scale(0.98);
+    }
+    .card-overlay {
+      transition: opacity 300ms;
+    }
+  </style>
+</head>
+<body class="bg-white dark:bg-neutral-950 p-4 md:p-8">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto md:px-8 w-full">
+    <!-- Card 1 -->
+    <div 
+      class="rounded-lg relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-96 w-full card"
+      onmouseenter="setHovered(0)"
+      onmouseleave="setHovered(null)"
+    >
+      <img
+        src="https://images.unsplash.com/photo-1518710843675-2540dd79065c?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        alt="Forest Adventure"
+        class="object-cover absolute inset-0"
+      />
+      <div class="absolute inset-0 bg-black/50 flex items-end py-8 px-4 card-overlay opacity-0">
+        <div class="text-xl md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200">
+          Forest Adventure
+        </div>
+      </div>
+    </div>
+    
+    <!-- Card 2 -->
+    <div 
+      class="rounded-lg relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-96 w-full card"
+      onmouseenter="setHovered(1)"
+      onmouseleave="setHovered(null)"
+    >
+      <img
+        src="https://images.unsplash.com/photo-1600271772470-bd22a42787b3?q=80&w=3072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        alt="Valley of life"
+        class="object-cover absolute inset-0"
+      />
+      <div class="absolute inset-0 bg-black/50 flex items-end py-8 px-4 card-overlay opacity-0">
+        <div class="text-xl md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200">
+          Valley of life
+        </div>
+      </div>
+    </div>
+    
+    <!-- Card 3 -->
+    <div 
+      class="rounded-lg relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-96 w-full card"
+      onmouseenter="setHovered(2)"
+      onmouseleave="setHovered(null)"
+    >
+      <img
+        src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=3070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        alt="Sala behta hi jayega"
+        class="object-cover absolute inset-0"
+      />
+      <div class="absolute inset-0 bg-black/50 flex items-end py-8 px-4 card-overlay opacity-0">
+        <div class="text-xl md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200">
+          Sala behta hi jayega
+        </div>
+      </div>
+    </div>
+    
+    <!-- Card 4 -->
+    <div 
+      class="rounded-lg relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-96 w-full card"
+      onmouseenter="setHovered(3)"
+      onmouseleave="setHovered(null)"
+    >
+      <img
+        src="https://images.unsplash.com/photo-1486915309851-b0cc1f8a0084?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        alt="Camping is for pros"
+        class="object-cover absolute inset-0"
+      />
+      <div class="absolute inset-0 bg-black/50 flex items-end py-8 px-4 card-overlay opacity-0">
+        <div class="text-xl md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200">
+          Camping is for pros
+        </div>
+      </div>
+    </div>
+    
+    <!-- Card 5 -->
+    <div 
+      class="rounded-lg relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-96 w-full card"
+      onmouseenter="setHovered(4)"
+      onmouseleave="setHovered(null)"
+    >
+      <img
+        src="https://images.unsplash.com/photo-1507041957456-9c397ce39c97?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        alt="The road not taken"
+        class="object-cover absolute inset-0"
+      />
+      <div class="absolute inset-0 bg-black/50 flex items-end py-8 px-4 card-overlay opacity-0">
+        <div class="text-xl md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200">
+          The road not taken
+        </div>
+      </div>
+    </div>
+    
+    <!-- Card 6 -->
+    <div 
+      class="rounded-lg relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-96 w-full card"
+      onmouseenter="setHovered(5)"
+      onmouseleave="setHovered(null)"
+    >
+      <img
+        src="https://assets.aceternity.com/the-first-rule.png"
+        alt="The First Rule"
+        class="object-cover absolute inset-0"
+      />
+      <div class="absolute inset-0 bg-black/50 flex items-end py-8 px-4 card-overlay opacity-0">
+        <div class="text-xl md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200">
+          The First Rule
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let hoveredIndex = null;
+    
+    function setHovered(index) {
+      hoveredIndex = index;
+      updateCards();
+    }
+    
+    function updateCards() {
+      const cards = document.querySelectorAll('.card');
+      const overlays = document.querySelectorAll('.card-overlay');
+      
+      cards.forEach((card, index) => {
+        if (hoveredIndex !== null && hoveredIndex !== index) {
+          card.classList.add('card-blur');
+        } else {
+          card.classList.remove('card-blur');
+        }
+      });
+      
+      overlays.forEach((overlay, index) => {
+        overlay.style.opacity = hoveredIndex === index ? '1' : '0';
+      });
+    }
+  </script>
+</body>
+</html>

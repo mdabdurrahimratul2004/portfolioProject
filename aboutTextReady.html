@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Mask Effect Demo</title>
+    <style>
+        :root {
+            --white: #ffffff;
+            --slate-900: #000000;
+            --slate-800: #1e293b;
+            --blue-500: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            overflow: hidden;
+        }
+
+        .demo-container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .mask-container {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            color: white;
+            background-color: var(--white);
+            transition: background-color 0.3s ease;
+        }
+
+        .mask-container.dark {
+            color: white;
+        }
+
+        .mask-container.hovered {
+            background-color: var(--slate-900);
+        }
+
+        .mask-container.dark {
+            background-color: var(--slate-900);
+        }
+
+        .mask-container.dark.hovered {
+            background-color: var(--slate-900);
+        }
+
+        .mask-layer {
+            position: absolute;
+            display: flex;
+            height: 100%;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+            font-size: 3.75rem;
+            mask-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=');
+            mask-repeat: no-repeat;
+            mask-size: 10px; /* Half size dot (10px) */
+            mask-position: 50% 50%;
+            transition: mask-size 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mask-layer.dark {
+            background-color: white;
+            color: black;
+        }
+
+        .mask-layer.animate-position {
+            transition: mask-position 0.15s linear, mask-size 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+            height: 100%;
+            width: 100%;
+            background-color: black;
+            opacity: 0.5;
+        }
+
+        .overlay.dark {
+            background-color: white;
+        }
+
+        .mask-content {
+            position: relative;
+            z-index: 20;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 56rem;
+            text-align: center;
+            font-size: 2.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+            padding: 2rem;
+        }
+
+        .reveal-text {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .reveal-content {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 56rem;
+            text-align: center;
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--slate-800);
+            line-height: 1.2;
+            padding: 2rem;
+        }
+
+        .reveal-content.dark {
+            color: white;
+        }
+
+        .text-blue-500 {
+            color: var(--blue-500);
+        }
+
+        body.dark {
+            background: #000000;
+        }
+
+        @media (max-width: 768px) {
+            .mask-content {
+                font-size: 1.875rem;
+                padding: 1.5rem;
+            }
+            
+            .reveal-content {
+                font-size: 1.875rem;
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .mask-content {
+                font-size: 1.5rem;
+                padding: 1rem;
+            }
+            
+            .reveal-content {
+                font-size: 1.5rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="dark">
+    <div class="demo-container">
+        <div class="mask-container dark" id="maskContainer">
+            <div class="mask-layer dark" id="maskLayer">
+                <div class="overlay dark" id="overlay"></div>
+                <div class="mask-content" id="maskContent">
+                    Don't spoil your time to <span class="text-blue-500">Explore</span> others . Explore yourself . I started<span class="text-blue-500"> Exploring </span>myself . Till can't explain myself .
+                </div>
+            </div>
+
+            <div class="reveal-text">
+                <div class="reveal-content dark" id="revealContent">
+                    My journey in <span style="color: red;">programming</span> began in college when I first discovered the thrill of solving problems with code. 
+                        Since then, I've solved over 500 problems on platforms like <span style="color: red;">codeforces</span>, Beecrowd, and HackerRank, 
+                        constantly challenging myself to improve my skills in data structures and algorithms.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isHovered = false;
+        let mousePosition = { x: null, y: null };
+        let animationFrame = null;
+
+        const container = document.getElementById('maskContainer');
+        const maskLayer = document.getElementById('maskLayer');
+        const overlay = document.getElementById('overlay');
+        const maskContent = document.getElementById('maskContent');
+        const revealContent = document.getElementById('revealContent');
+
+        // Initialize mouse position to center
+        function initializeMousePosition() {
+            const rect = container.getBoundingClientRect();
+            mousePosition = {
+                x: rect.width / 2,
+                y: rect.height / 2
+            };
+            updateMaskPosition();
+        }
+
+        // Update mouse position
+        function updateMousePosition(e) {
+            const rect = container.getBoundingClientRect();
+            mousePosition = {
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            };
+            updateMaskPosition();
+        }
+
+        // Update mask position and size
+        function updateMaskPosition() {
+            if (mousePosition.x === null || mousePosition.y === null) return;
+            
+            const maskSize = isHovered ? 600 : 10; // Half size dot (10px) when not hovering
+            const x = mousePosition.x - maskSize / 2;
+            const y = mousePosition.y - maskSize / 2;
+            
+            maskLayer.style.maskPosition = `${x}px ${y}px`;
+            maskLayer.style.maskSize = `${maskSize}px`;
+        }
+
+        // Text hover handlers
+        function handleTextEnter() {
+            isHovered = true;
+            updateHoverState();
+        }
+
+        function handleTextLeave() {
+            isHovered = false;
+            updateHoverState();
+        }
+
+        // Add event listeners to text elements
+        maskContent.addEventListener('mouseenter', handleTextEnter);
+        maskContent.addEventListener('mouseleave', handleTextLeave);
+        revealContent.addEventListener('mouseenter', handleTextEnter);
+        revealContent.addEventListener('mouseleave', handleTextLeave);
+
+        // Mouse move handler (only for position tracking)
+        container.addEventListener('mousemove', updateMousePosition);
+
+        // Update hover state
+        function updateHoverState() {
+            if (isHovered) {
+                container.classList.add('hovered');
+                maskLayer.classList.add('animate-position');
+            } else {
+                container.classList.remove('hovered');
+                maskLayer.classList.add('animate-position');
+            }
+            updateMaskPosition();
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            initializeMousePosition();
+        });
+
+        // Handle resize
+        window.addEventListener('resize', () => {
+            if (mousePosition.x !== null && mousePosition.y !== null) {
+                updateMaskPosition();
+            }
+        });
+
+        // Cleanup on unload
+        window.addEventListener('beforeunload', () => {
+            if (animationFrame) {
+                cancelAnimationFrame(animationFrame);
+            }
+        });
+    </script>
+</body>
+</html>

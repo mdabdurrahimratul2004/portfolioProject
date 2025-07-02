@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Direction Aware Hover</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #000;
+    }
+    .h-\[40rem\] {
+      height: 40rem;
+    }
+    .relative {
+      position: relative;
+    }
+    .flex {
+      display: flex;
+    }
+    .items-center {
+      align-items: center;
+    }
+    .justify-center {
+      justify-content: center;
+    }
+    .font-bold {
+      font-weight: 700;
+    }
+    .text-xl {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+    .md\:h-96 {
+      height: 48rem;
+    }
+    .w-60 {
+      width: 15rem;
+    }
+    .h-60 {
+      height: 28rem;
+    }
+    .md\:w-96 {
+      width: 24rem;
+    }
+    .bg-transparent {
+      background-color: transparent;
+    }
+    .rounded-lg {
+      border-radius: 0.5rem;
+    }
+    .overflow-hidden {
+      overflow: hidden;
+    }
+    .group\/card {
+      position: relative;
+    }
+    .relative {
+      position: relative;
+    }
+    .h-full {
+      height: 100%;
+    }
+    .w-full {
+      width: 100%;
+    }
+    .hidden {
+      display: none;
+    }
+    .absolute {
+      position: absolute;
+    }
+    .inset-0 {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+    .bg-black\/40 {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    .z-10 {
+      z-index: 10;
+    }
+    .transition {
+      transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms;
+    }
+    .duration-500 {
+      transition-duration: 500ms;
+    }
+    .bg-gray-50 {
+      background-color: #f9fafb;
+    }
+    .dark\:bg-black {
+      background-color: #000;
+    }
+    .object-cover {
+      object-fit: cover;
+    }
+    .scale-\[1\.15\] {
+      transform: scale(1.15);
+    }
+    .text-white {
+      color: #fff;
+    }
+    .bottom-4 {
+      bottom: 1rem;
+    }
+    .left-4 {
+      left: 1rem;
+    }
+    .z-40 {
+      z-index: 40;
+    }
+    .group-hover\/card\:block:hover .group-hover\/card\:block {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useRef, useState } = React;
+    const { motion, AnimatePresence } = window.Motion;
+
+    const DirectionAwareHover = ({
+      imageUrl,
+      children,
+      childrenClassName,
+      imageClassName,
+      className,
+    }) => {
+      const ref = useRef(null);
+
+      const [direction, setDirection] = useState("left");
+
+      const handleMouseEnter = (event) => {
+        if (!ref.current) return;
+
+        const direction = getDirection(event, ref.current);
+        switch (direction) {
+          case 0:
+            setDirection("top");
+            break;
+          case 1:
+            setDirection("right");
+            break;
+          case 2:
+            setDirection("bottom");
+            break;
+          case 3:
+            setDirection("left");
+            break;
+          default:
+            setDirection("left");
+            break;
+        }
+      };
+
+      const getDirection = (ev, obj) => {
+        const { width: w, height: h, left, top } = obj.getBoundingClientRect();
+        const x = ev.clientX - left - (w / 2) * (w > h ? h / w : 1);
+        const y = ev.clientY - top - (h / 2) * (h > w ? w / h : 1);
+        const d = Math.round(Math.atan2(y, x) / 1.57079633 + 5) % 4;
+        return d;
+      };
+
+      return (
+        <motion.div
+          onMouseEnter={handleMouseEnter}
+          ref={ref}
+          className={`md:h-96 w-60 h-60 md:w-96 bg-transparent rounded-lg overflow-hidden group/card relative ${className || ''}`}
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              className="relative h-full w-full"
+              initial="initial"
+              whileHover={direction}
+              exit="exit"
+            >
+              <motion.div className="group-hover/card:block hidden absolute inset-0 w-full h-full bg-black/40 z-10 transition duration-500" />
+              <motion.div
+                variants={variants}
+                className="h-full w-full relative bg-gray-50 dark:bg-black"
+                transition={{
+                  duration: 0.2,
+                  ease: "easeOut",
+                }}
+              >
+                <img
+                  alt="image"
+                  className={`h-full w-full object-cover scale-[1.15] ${imageClassName || ''}`}
+                  width="1000"
+                  height="1000"
+                  src={imageUrl}
+                />
+              </motion.div>
+              <motion.div
+                variants={textVariants}
+                transition={{
+                  duration: 0.5,
+                  ease: "easeOut",
+                }}
+                className={`text-white absolute bottom-4 left-4 z-40 ${childrenClassName || ''}`}
+              >
+                {children}
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
+        </motion.div>
+      );
+    };
+
+    const variants = {
+      initial: {
+        x: 0,
+      },
+      exit: {
+        x: 0,
+        y: 0,
+      },
+      top: {
+        y: 20,
+      },
+      bottom: {
+        y: -20,
+      },
+      left: {
+        x: 20,
+      },
+      right: {
+        x: -20,
+      },
+    };
+
+    const textVariants = {
+      initial: {
+        y: 0,
+        x: 0,
+        opacity: 0,
+      },
+      exit: {
+        y: 0,
+        x: 0,
+        opacity: 0,
+      },
+      top: {
+        y: -20,
+        opacity: 1,
+      },
+      bottom: {
+        y: 2,
+        opacity: 1,
+      },
+      left: {
+        x: -2,
+        opacity: 1,
+      },
+      right: {
+        x: 20,
+        opacity: 1,
+      },
+    };
+
+    function DirectionAwareHoverDemo() {
+      const imageUrl = "neww.jpg";
+      return (
+        <div style={{ minHeight: '100vh', minWidth: '100vw', background: '#000', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '4rem' }}>
+          <DirectionAwareHover imageUrl={imageUrl}>
+            <p className="font-bold text-xl">MD. Abdur Rahim Ratul</p>
+          </DirectionAwareHover>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<DirectionAwareHoverDemo />);
+  </script>
+</body>
+</html>

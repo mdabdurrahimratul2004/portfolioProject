@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary: #0d6efd;
+            --accent: #fd7e14;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --white: #ffffff;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease-in-out;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            position: relative;
+            padding-top: 80px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: #000000;
+            --gap: 5em;
+            --line: 1px;
+            --color: rgba(255, 255, 255, 0.2);
+            background-image: linear-gradient(
+                    -90deg,
+                    transparent calc(var(--gap) - var(--line)),
+                    var(--color) calc(var(--gap) - var(--line) + 1px),
+                    var(--color) var(--gap)
+                ),
+                linear-gradient(
+                    0deg,
+                    transparent calc(var(--gap) - var(--line)),
+                    var(--color) calc(var(--gap) - var(--line) + 1px),
+                    var(--color) var(--gap)
+                );
+            background-size: var(--gap) var(--gap);
+            padding: 80px 0;
+            color: white;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover .contact-icon {
+            background-color: var(--accent);
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .contact-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .contact-text p {
+            color: var(--gray);
+        }
+
+        .contact-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .contact-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .contact-social a:hover {
+            background-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .contact-form h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+
+        /* Nebula Input Styles */
+        .nebula-input {
+            position: relative;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .nebula-input .input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #2a2a3a;
+            background: #00000f;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            border-radius: 8px;
+            transition: all 0.4s ease-out;
+        }
+
+        .nebula-input .user-label {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            pointer-events: none;
+            color: #6a6a8a;
+            transition: all 0.4s ease-out;
+            background: #00000f;
+            padding: 0 5px;
+        }
+
+        .nebula-input .input:focus {
+            border-color: #b56aff;
+            box-shadow:
+                0 5px 8px rgba(181, 106, 255, 0.3),
+                0 10px 20px rgba(181, 106, 255, 0.2),
+                0 15px 40px rgba(181, 106, 255, 0.15),
+                0 20px 60px rgba(181, 106, 255, 0.1);
+        }
+
+        .nebula-input .input:focus ~ .user-label,
+        .nebula-input .input:valid ~ .user-label {
+            transform: translateY(-25px);
+            font-size: 12px;
+            color: #d18cff;
+            left: 10px;
+        }
+
+        .nebula-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            top: 50%;
+            left: 10px;
+            filter: blur(0.8px);
+            mix-blend-mode: screen;
+            transition: opacity 0.3s ease;
+        }
+
+        .nebula-input .input:focus ~ .nebula-particle {
+            animation: nebula-float 2s forwards ease-out;
+        }
+
+        @keyframes nebula-float {
+            0% {
+                transform: translate(0, -50%) scale(0.8);
+                opacity: 0;
+                background: #c774ff;
+            }
+            20% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(calc(var(--x) * 140px), calc(var(--y) * 35px))
+                scale(1.1);
+                opacity: 0;
+                background: #6df2ff;
+            }
+        }
+
+        textarea.input {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-message {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .form-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .form-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        /* Special Send Button */
+        .btn-send {
+            font-family: inherit;
+            font-size: 20px;
+            background: royalblue;
+            color: white;
+            padding: 0.7em 1em;
+            padding-left: 0.9em;
+            display: flex;
+            align-items: center;
+            border: none;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-send span {
+            display: block;
+            margin-left: 0.3em;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-send svg {
+            display: block;
+            transform-origin: center center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .btn-send:hover .svg-wrapper {
+            animation: fly-1 0.6s ease-in-out infinite alternate;
+        }
+
+        .btn-send:hover svg {
+            transform: translateX(1.2em) rotate(45deg) scale(1.1);
+        }
+
+        .btn-send:hover span {
+            transform: translateX(5em);
+        }
+
+        .btn-send:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes fly-1 {
+            from {
+                transform: translateY(0.1em);
+            }
+            to {
+                transform: translateY(-0.1em);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .contact-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .contact-icon {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Phone</h4>
+                                <p>+8801786500883</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>ratul1.cse18kyau@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Location</h4>
+                                <p>Shahzadpur, Sirajganj, Bangladesh</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 style="margin-top: 30px;">Follow Me</h3>
+                    <div class="contact-social">
+                        <a href="https://github.com/mdabdurrahimratul2004?tab=following" class="social-icon" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://mail.google.com/mail/?view=cm&to=ratull.cse18kyau@gmail.com" class="social-icon" target="_blank"><i class="fas fa-envelope"></i></a>
+                        <a href="https://www.linkedin.com/in/ratul05" class="social-icon" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://codeforces.com/profile/RATUL_CSE18" class="social-icon" target="_blank"><i class="fas fa-code"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send Me a Message</h3>
+                    <form id="form" action="https://formspree.io/f/manjnopa" method="POST">
+                        <div class="form-message" id="form-message"></div>
+                        <div class="nebula-input">
+                            <input required="" type="text" name="name" autocomplete="off" class="input" />
+                            <label class="user-label">Name</label>
+                            <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
+                            <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
+                            <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
+                            <div class="nebula-particle" style="--x:0.7; --y:0.1; --delay:0.2s"></div>
+                            <div class="nebula-particle" style="--x:0.1; --y:-0.7; --delay:0.4s"></div>
+                            <div class="nebula-particle" style="--x:0.6; --y:0.4; --delay:0.6s"></div>
+                        </div>
+                        <div class="nebula-input">
+                            <input required="" type="email" name="email" autocomplete="off" class="input" />
+                            <label class="user-label">Email</label>
+                            <div class="nebula-particle" style="--x:0.1; --y:-0.3; --delay:0.2s"></div>
+                            <div class="nebula-particle" style="--x:0.4; --y:-0.1; --delay:0.4s"></div>
+                            <div class="nebula-particle" style="--x:0.2; --y:0.4; --delay:0.6s"></div>
+                            <div class="nebula-particle" style="--x:0.6; --y:0.2; --delay:0.3s"></div>
+                        </div>
+                        <div class="nebula-input">
+                            <input required="" type="text" name="subject" autocomplete="off" class="input" />
+                            <label class="user-label">Subject</label>
+                            <div class="nebula-particle" style="--x:0.3; --y:-0.5; --delay:0.1s"></div>
+                            <div class="nebula-particle" style="--x:0.7; --y:-0.2; --delay:0.5s"></div>
+                        </div>
+                        <div class="nebula-input">
+                            <textarea required="" name="message" autocomplete="off" class="input" style="min-height: 150px;"></textarea>
+                            <label class="user-label">Message</label>
+                            <div class="nebula-particle" style="--x:0.2; --y:-0.6; --delay:0.4s"></div>
+                            <div class="nebula-particle" style="--x:0.5; --y:-0.3; --delay:0.2s"></div>
+                            <div class="nebula-particle" style="--x:0.8; --y:0.1; --delay:0.6s"></div>
+                            <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
+                            <div class="nebula-particle" style="--x:0.7; --y:0.1; --delay:0.2s"></div>
+                            <div class="nebula-particle" style="--x:0.1; --y:-0.7; --delay:0.4s"></div>
+                            <div class="nebula-particle" style="--x:0.6; --y:0.4; --delay:0.6s"></div>
+                            <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
+                            <div class="nebula-particle" style="--x:0.7; --y:0.1; --delay:0.2s"></div>
+                            <div class="nebula-particle" style="--x:0.1; --y:-0.7; --delay:0.4s"></div>
+                            <div class="nebula-particle" style="--x:0.6; --y:0.4; --delay:0.6s"></div>
+                        </div>
+                        <button type="submit" class="btn-send">
+                            <div class="svg-wrapper-1">
+                                <div class="svg-wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                        <path fill="none" d="M0 0h24v24H0z"></path>
+                                        <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <span>Send</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form submission
+            const form = document.getElementById('form');
+            const formMessage = document.getElementById('form-message');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                const xhr = new XMLHttpRequest();
+                
+                xhr.open('POST', form.action, true);
+                xhr.setRequestHeader('Accept', 'application/json');
+                
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            // Success
+                            formMessage.textContent = 'Thank you! Your message has been sent successfully.';
+                            formMessage.classList.add('success');
+                            formMessage.classList.remove('error');
+                            formMessage.style.display = 'block';
+                            form.reset();
+                            
+                            // Scroll to show success message
+                            setTimeout(() => {
+                                formMessage.scrollIntoView({ behavior: 'smooth' });
+                            }, 100);
+                        } else {
+                            // Error
+                            formMessage.textContent = 'Oops! There was a problem sending your message. Please try again later.';
+                            formMessage.classList.add('error');
+                            formMessage.classList.remove('success');
+                            formMessage.style.display = 'block';
+                        }
+                    }
+                };
+                
+                xhr.send(formData);
+            });
+
+            // Nebula input animations
+            const nebulaInputs = document.querySelectorAll('.nebula-input .input');
+            
+            nebulaInputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    const particles = this.parentNode.querySelectorAll('.nebula-particle');
+                    particles.forEach(particle => {
+                        particle.style.opacity = '1';
+                    });
+                });
+                
+                input.addEventListener('blur', function() {
+                    const particles = this.parentNode.querySelectorAll('.nebula-particle');
+                    particles.forEach(particle => {
+                        particle.style.opacity = '0';
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
